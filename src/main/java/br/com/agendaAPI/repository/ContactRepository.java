@@ -4,10 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.agendaAPI.model.Contato;
+import br.com.agendaAPI.model.Contact;
 
 @Repository
-public interface ContatoRepository extends JpaRepository<Contato, Long> {
+public interface ContactRepository extends JpaRepository<Contact, Long> {
 
 	
 }

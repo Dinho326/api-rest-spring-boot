@@ -8,20 +8,34 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.agendaAPI.model.InfoError;
-import br.com.agendaAPI.service.exceptions.ContatoNotFound;
+import br.com.agendaAPI.service.exceptions.ContactNotFound;
+import br.com.agendaAPI.service.exceptions.GroupNotFound;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-	@ExceptionHandler(ContatoNotFound.class)
+	@ExceptionHandler(ContactNotFound.class)
 	public ResponseEntity<InfoError> handleContatoNotFoundException
-	(ContatoNotFound e, HttpServletRequest request){
+	(ContactNotFound e, HttpServletRequest request){
 		
 		InfoError erro = new InfoError();
-		
 		erro.setStatus(404l);
-		erro.setTitulo("O Contato não foi encontrado");
-		erro.setMsg("Maiores informações entre em contato em http://edilsontomas.com.br");
+		erro.setTitle("O Contato não foi encontrado");
+		erro.setMessage("Maiores informações entre em contato em http://edilsontomas.com.br");
+		erro.setTimestamp(System.currentTimeMillis());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+	}
+	
+	
+	
+	@ExceptionHandler(GroupNotFound.class)
+	public ResponseEntity<InfoError> handleContatoNotFoundException
+	(GroupNotFound e, HttpServletRequest request){
+		
+		InfoError erro = new InfoError();
+		erro.setStatus(404l);
+		erro.setTitle("O Grupo não foi encontrado");
+		erro.setMessage("Maiores informações entre em contato em http://edilsontomas.com.br");
 		erro.setTimestamp(System.currentTimeMillis());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
 	}

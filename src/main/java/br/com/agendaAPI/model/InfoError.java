@@ -2,20 +2,20 @@ package br.com.agendaAPI.model;
 
 public class InfoError {
 
-	private String titulo;
+	private String title;
 	
 	private Long status;
 	
 	private Long timestamp;
 	
-	private String msg;
+	private String message;
 
-	public String getTitulo() {
-		return titulo;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setTitle(String titulo) {
+		this.title = titulo;
 	}
 
 	public Long getStatus() {
@@ -34,12 +34,12 @@ public class InfoError {
 		this.timestamp = timestamp;
 	}
 
-	public String getMsg() {
-		return msg;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setMsg(String msg) {
-		this.msg = msg;
+	public void setMessage(String msg) {
+		this.message = msg;
 	}
 	
 	

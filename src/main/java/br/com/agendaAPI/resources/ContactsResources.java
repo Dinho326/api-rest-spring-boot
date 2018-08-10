@@ -14,52 +14,52 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.agendaAPI.model.Contato;
-import br.com.agendaAPI.repository.ContatoRepository;
-import br.com.agendaAPI.service.ContatoService;
-import br.com.agendaAPI.service.exceptions.ContatoNotFound;
+import br.com.agendaAPI.model.Contact;
+import br.com.agendaAPI.repository.ContactRepository;
+import br.com.agendaAPI.service.ContactService;
+import br.com.agendaAPI.service.exceptions.ContactNotFound;
 
 @RestController
 @RequestMapping("/contatos")
-public class ContatosResources {
+public class ContactsResources {
 
 	@Autowired
-	private ContatoService contatoService;
+	private ContactService contatoService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public  ResponseEntity<List<Contato>> getContatos(){
+	public  ResponseEntity<List<Contact>> getContacts(){
 			
-		return ResponseEntity.status(HttpStatus.OK).body(contatoService.getLista());
+		return ResponseEntity.status(HttpStatus.OK).body(contatoService.getList());
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> salvarContato(@RequestBody Contato contato) {
+	public ResponseEntity<Void> salvarContact(@RequestBody Contact contact) {
 		
-		contato = contatoService.salvar(contato);
+		contact = contatoService.save(contact);
 		URI uri = ServletUriComponentsBuilder.
-				fromCurrentRequest().path("/{id}").buildAndExpand(contato.getId()).toUri();
+				fromCurrentRequest().path("/{id}").buildAndExpand(contact.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<?> getContato(@PathVariable("id") Long id) {
+	public ResponseEntity<?> getContact(@PathVariable("id") Long id) {
 		
-		Contato c = contatoService.getContatoById(id);
+		Contact c = contatoService.getContactById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(c);
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
-	public ResponseEntity<Void> deletarContato(@PathVariable("id") Long id) {
+	public ResponseEntity<Void> deleteContact(@PathVariable("id") Long id) {
 		
-		contatoService.deletar(id);
+		contatoService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
-	public ResponseEntity<Void> atualizarContato(@RequestBody Contato contato, @PathVariable("id") Long id) {
+	public ResponseEntity<Void> updateContact(@RequestBody Contact contato, @PathVariable("id") Long id) {
 		
 		contato.setId(id);
-		contatoService.atualizar(contato);
+		contatoService.update(contato);
 		return ResponseEntity.noContent().build();
 	}
 	
