@@ -67,7 +67,7 @@ public class GroupsResources {
 		
 		Contact contact = grupoService.addGrouptInContact(idGroup, idContact);
 		URI uri = ServletUriComponentsBuilder.
-				fromCurrentRequest().path("/{id}").buildAndExpand(contact.getId()).toUri();
+				fromCurrentRequest().build().toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	

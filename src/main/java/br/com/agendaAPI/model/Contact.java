@@ -1,18 +1,22 @@
 package br.com.agendaAPI.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -35,6 +39,7 @@ public class Contact implements Serializable{
 	private String numberPhone;
 	
 	@JsonInclude(Include.NON_NULL)
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date createDate;
 	
 	@ManyToMany(cascade = { 
@@ -48,6 +53,17 @@ public class Contact implements Serializable{
 		@JsonIgnore
 	    private List<Group> groups;
 	
+	
+	@Transient
+	private List<Group> allGroups;
+	
+	public List<String> getGroupsAll() {
+		List<String> names = new ArrayList<String>();
+		for(Group g: getGroups() ) {
+			names.add(g.getName());
+		}
+		return names;
+	}
 	
 	public Contact() {
 		

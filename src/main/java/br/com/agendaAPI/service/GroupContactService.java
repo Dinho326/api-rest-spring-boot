@@ -27,7 +27,7 @@ public class GroupContactService {
 	
 	/**
 	 * 
-	 * @param id
+	 * @param id 
 	 * @return
 	 */
 	public Contact getContactById(Long id){
@@ -35,6 +35,10 @@ public class GroupContactService {
 		Contact c = contactRepository.findById(id).orElse(null);
 		if(c == null) {
 			throw new ContactNotFound(CONTATO_NOT_FOUND);
+		}
+		if(!c.getGroups().isEmpty()) {
+			
+			System.out.println(c.getGroups().get(0).getName());
 		}
 		return c;
 	}

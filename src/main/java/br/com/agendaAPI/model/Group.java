@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -32,6 +33,7 @@ public class Group implements Serializable {
 	@NaturalId
 	private String name;
 	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date createDate;
 
 	@JsonInclude(Include.NON_EMPTY)
