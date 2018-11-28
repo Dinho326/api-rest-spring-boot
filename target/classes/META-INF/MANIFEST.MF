@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: agendaAPI
 Implementation-Version: 1.0.0-SNAPSHOT
-Built-By: edilson.carvalho
+Built-By: Dinho
 Implementation-Vendor-Id: br.com.agendaAPI
-Build-Jdk: 1.8.0_161
+Build-Jdk: 1.8.0_171
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/br.com.agendaAPI
 Created-By: Maven Integration for Eclipse

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NaturalId;
 
@@ -30,6 +32,9 @@ public class Group implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotEmpty(message = "O campo name não pode ser vazio")
+	@JsonInclude(Include.NON_NULL)
+	@Size(max = 50, message="O campo name do grupo não pode ter mais do que 50 caracteres ")
 	@NaturalId
 	private String name;
 	

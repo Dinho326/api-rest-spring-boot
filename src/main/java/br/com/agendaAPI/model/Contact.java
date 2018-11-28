@@ -15,11 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Contact implements Serializable{
@@ -33,13 +36,19 @@ public class Contact implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
+	@JsonInclude(Include.NON_NULL)
+	@Size(max = 50, message="O campo name do contato não pode ter mais do que 50 caracteres ")
+	@NotEmpty(message = "O campo name não pode ser vazio")
 	private String name;
 	
+	@NotEmpty(message = "O campo numberPhone não pode ser vazio")
 	@JsonInclude(Include.NON_NULL)
+	//@JsonProperty("Cell Number")
 	private String numberPhone;
 	
 	@JsonInclude(Include.NON_NULL)
 	@JsonFormat(pattern="dd/MM/yyyy")
+	//@JsonProperty("Create Date")
 	private Date createDate;
 	
 	@ManyToMany(cascade = { 
@@ -53,7 +62,7 @@ public class Contact implements Serializable{
 		@JsonIgnore
 	    private List<Group> groups;
 	
-	
+	@JsonInclude(Include.NON_EMPTY)
 	@Transient
 	private List<Group> allGroups;
 	
